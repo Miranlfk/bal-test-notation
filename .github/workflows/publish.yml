@@ -3,7 +3,7 @@ name: publish
 on: [push]
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: bal-test-cosign
+  IMAGE_NAME: bal-test-notation
 
 jobs:
   publish-Ballerina-docker-image:
