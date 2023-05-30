@@ -43,7 +43,7 @@ jobs:
       - name: Sign the published Docker image
         env: 
           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign --key ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v8
+        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v8
         
 #       - name: Create GitHub release
 #         id: new-notation-test
