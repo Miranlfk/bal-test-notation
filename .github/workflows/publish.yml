@@ -11,7 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
-      - uses: Duffney/setup-notation@v1.0.0
+      - name: Setup Notation with azure-kv plugin
+        uses: Duffney/setup-notation@v1.0.0
+        with:
+          key_name: baltest
+          certificate_key_id: https://balkey.vault.azure.net/certificates/notationLeafCert/e145b3f6572047e0aa6a74fb70d74e42
+          plugin_name: notation-azure-kv
           
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
@@ -36,24 +41,24 @@ jobs:
       - name: Sign the published Docker image
         env: 
           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign --key "trusted" ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v8
+        run: notation sign --key ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v8
         
-      - name: Create GitHub release
-        id: new-notation-test
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: v${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+#       - name: Create GitHub release
+#         id: new-notation-test
+#         uses: actions/create-release@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           tag_name: v${{ github.run_number }}
+#           release_name: Release ${{ github.run_number }}
           
-      - name: Upload Public Key to GitHub release
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.new-notation-test.outputs.upload_url }}
-          asset_path: ./trusted.pem
-          asset_name: trusted.pem
-          asset_content_type: application/octet-stream
+#       - name: Upload Public Key to GitHub release
+#         uses: actions/upload-release-asset@v1
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           upload_url: ${{ steps.new-notation-test.outputs.upload_url }}
+#           asset_path: ./trusted.pem
+#           asset_name: trusted.pem
+#           asset_content_type: application/octet-stream
           
