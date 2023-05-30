@@ -30,9 +30,9 @@ jobs:
       - name: Build the Ballerina Docker image
         run: |
 
-          docker build --no-cache=true . --tag ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
-          docker run ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
-          docker push ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+          docker build --no-cache=true . --tag ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v15
+          docker run ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v15
+          docker push ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v15
         
       - name: Verify key generation
         run: notation key list 
@@ -40,7 +40,7 @@ jobs:
       - name: Sign the published Docker image
         env: 
           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v15
         
 #       - name: Create GitHub release
 #         id: new-notation-test
