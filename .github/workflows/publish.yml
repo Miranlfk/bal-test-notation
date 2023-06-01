@@ -11,6 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: azure-resource-login
+        uses: Azure/azure-resource-login-action@v1.0.0
+        with:
+          username: xxxxx
+          password: xxxxx
+      
       - name: Setup Notation with azure-kv plugin
         uses: Duffney/setup-notation@v1.0.0
         with:
