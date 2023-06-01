@@ -14,8 +14,7 @@ jobs:
       - name: azure-resource-login
         uses: Azure/azure-resource-login-action@v1.0.0
         with:
-          username: ${{ secrets.AZURE_USERNAME }}
-          password: ${{ secrets.AZURE_PASSWORD }}
+          credentials: ${{ secrets.AZURE_CREDENTIALS }}
       
       - name: Setup Notation with azure-kv plugin
         uses: Duffney/setup-notation@v1.0.0
