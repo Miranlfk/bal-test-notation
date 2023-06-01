@@ -54,7 +54,7 @@ jobs:
 #           password: ${{ secrets.GITHUB_TOKEN }}
         run: |
          notation key list
-         notation sign --key baltest ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+         notation sign --key baltest ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} --plugin-config=ca_cert=ca.crt
         
 #       - name: Create GitHub release
 #         id: new-notation-test
