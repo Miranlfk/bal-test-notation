@@ -14,15 +14,15 @@ jobs:
       - name: azure-resource-login
         uses: Azure/azure-resource-login-action@v1.0.0
         with:
-          username: xxxxx
-          password: xxxxx
+          username: ${{ secrets.AZURE_USERNAME }}
+          password: ${{ secrets.AZURE_PASSWORD }}
       
       - name: Setup Notation with azure-kv plugin
         uses: Duffney/setup-notation@v1.0.0
         with:
           version: 1.0.0-rc.7
           key_name: baltest
-          certificate_key_id: https://balkey.vault.azure.net/certificates/notationLeafCert/e145b3f6572047e0aa6a74fb70d74e42
+          certificate_key_id: ${{ secrets.KEY }}
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
@@ -49,7 +49,7 @@ jobs:
       - name: Sign the published Docker image
         env: 
           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign --key baltest ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
         
 #       - name: Create GitHub release
 #         id: new-notation-test
