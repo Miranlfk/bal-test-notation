@@ -50,11 +50,11 @@ jobs:
      
       - name: Sign the published Docker image
         env: 
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-#           password: ${{ secrets.GITHUB_TOKEN }}
+#           creds: ${{ secrets.AZURE_CREDENTIALS }}
+          password: ${{ secrets.GITHUB_TOKEN }}
         run: |
          notation key list
-         notation sign --key baltest ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} --plugin-config=ca_cert=Baltested.crt
+         notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} --plugin-config=ca_cert=Baltested.crt
         
 #       - name: Create GitHub release
 #         id: new-notation-test
