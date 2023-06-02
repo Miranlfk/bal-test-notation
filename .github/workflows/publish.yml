@@ -47,8 +47,8 @@ jobs:
         
 #       - name: Verify key generation
 #         run: notation key list 
-      - uses: notation-sign-action@v0.1.0
       - name: Sign container image
+        uses: notation-sign-action@v0.1.0
         with:
           image-name: '${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}'
         
