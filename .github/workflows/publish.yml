@@ -42,8 +42,6 @@ jobs:
           docker run ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
           docker push ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
       
-#       - name: Generate key to sign published Docker image
-#         run: notation cert generate-test --default "trusted" 
         
 #       - name: Verify key generation
 #         run: notation key list 
