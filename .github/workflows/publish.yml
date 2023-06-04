@@ -24,7 +24,7 @@ jobs:
         with:
           version: 1.0.0-rc.7
           key_name: baltest
-          certificate_key_id: https://balkey.vault.azure.net/certificates/Baltested/a9ff971f48dc4b519c7162eff389c89f
+          certificate_key_id: https://balkey.vault.azure.net/keys/Baltested/a9ff971f48dc4b519c7162eff389c89f
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
