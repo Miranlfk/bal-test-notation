@@ -21,7 +21,7 @@ jobs:
         with:
           version: 1.0.0-rc.7
           key_name: balkeyzure
-          certificate_key_id: https://balkey.vault.azure.net/keys/notationLeafCert/e145b3f6572047e0aa6a74fb70d74e42
+          certificate_key_id: https://balkey.vault.azure.net/keys/CertBal/d1580c9890d34888b23dcc03ed6d0dc0
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
