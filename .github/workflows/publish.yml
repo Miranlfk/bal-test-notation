@@ -45,16 +45,14 @@ jobs:
 #       - name: Generate key to sign published Docker image
 #         run: notation cert generate-test --default "trusted" 
         
-#       - name: Verify key generation
-#         run: notation key list 
+      - name: Verify key generation
+        run: notation key list 
      
       - name: Sign the published Docker image
         env: 
-#           creds: ${{ secrets.AZURE_TOKEN }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
           password: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-         notation key list
-         notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} --plugin-config=ca_cert=Baltested.crt
+        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
         
 #       - name: Create GitHub release
 #         id: new-notation-test
