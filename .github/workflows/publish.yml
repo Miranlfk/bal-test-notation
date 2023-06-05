@@ -21,7 +21,7 @@ jobs:
         with:
           version: 1.0.0-rc.7
           key_name: NotationSign
-          certificate_key_id: https://balvault.vault.azure.net/keys/BalTesting/3e868b5126384ff98048efcdbb9e4af5
+          certificate_key_id: https://balvault.vault.azure.net/keys/BalTests/4c91b10f7ed2429893be57348aced7d3
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
