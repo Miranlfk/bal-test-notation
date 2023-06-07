@@ -2,8 +2,8 @@
 name: publish
 on: [push]
 env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: bal-test-notation
+  REGISTRY: ballerinatest.azurecr.io
+  IMAGE_NAME: ballerina-test
 
 jobs:
   publish-Ballerina-docker-image:
@@ -25,19 +25,17 @@ jobs:
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2
+      - name: Azure Container Registry Login
+        uses: Azure/docker-login@v1
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Build the Ballerina Docker image
         run: |
 
-          docker build --no-cache=true . --tag ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
-          docker run ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
-          docker push ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+          docker build --no-cache=true . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+          docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
       
 #       - name: Generate key to sign published Docker image
 #         run: notation cert generate-test --default "trusted" 
@@ -49,7 +47,7 @@ jobs:
 #         env: 
 # #           creds: ${{ secrets.AZURE_CREDENTIALS }}
 # #           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+        run: notation sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
         
 #       - name: Create GitHub release
 #         id: new-notation-test
