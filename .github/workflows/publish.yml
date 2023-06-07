@@ -28,7 +28,9 @@ jobs:
       - name: Azure Container Registry Login
         uses: Azure/docker-login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          username: ${{ secrets.AZURE_USER }}
+          password: ${{ secrets.AZURE_PASSWORD }}
+          login-server: ${{ env.REGISTRY }}
 
       - name: Build the Ballerina Docker image
         run: |
