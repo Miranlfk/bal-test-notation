@@ -33,7 +33,7 @@ jobs:
           tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz
           sudo mkdir notation-cli
           cd notation-cli
-          mkdir bin
+          sudo mkdir bin
           cd ../
           sudo mv notation notation-cli/bin
           echo "export PATH=/notation-cli/bin:\$PATH" >> $HOME/.bashrc
