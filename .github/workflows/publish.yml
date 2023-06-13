@@ -32,7 +32,7 @@ jobs:
           curl -LO https://github.com/notaryproject/notation/releases/download/v1.0.0-rc.7/notation_1.0.0-rc.7_linux_amd64.tar.gz
           tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz
           sudo mkdir -p /notation-cli/notation
-          mv notation/* /notation-cli/notation
+          mv $extracted_folder /notation-cli/notation
           echo "export PATH=/notation-cli/notation:\$PATH" >> $HOME/.bashrc
           source $HOME/.bashrc
 
