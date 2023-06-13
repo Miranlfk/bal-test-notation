@@ -26,6 +26,11 @@ jobs:
       #     plugin_version:  0.5.0-rc.1
       - name: Setup Go environment
         uses: actions/setup-go@v4.0.1
+      
+      - name: Set up bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y bash
           
       - name: Setup and Install Notation 
         run : |
