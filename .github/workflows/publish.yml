@@ -33,7 +33,7 @@ jobs:
           tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz
           extracted_folder=$(tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz | head -1 | cut -f1 -d"/")
           sudo mkdir -p /notation-cli/notation
-          chmod -R 777 /notation-cli/notation
+          sudo chmod -R 777 /notation-cli/notation
           mv $extracted_folder/* /notation-cli/notation
           echo "export PATH=/notation-cli/notation:\$PATH" >> $HOME/.bashrc
           source $HOME/.bashrc
