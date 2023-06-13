@@ -34,13 +34,12 @@ jobs:
           tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz
           sudo mkdir notation-cli
           sudo mv notation notation-cli
-          echo 'export PATH=$PATH:/notation-cli' >> $HOME/.bashrc
-          source $HOME/.bashrc
+          echo '/notation-cli' >> $GITHUB_PATH
 
       - name: Verify Notation Installation
         run: |
           echo $PATH
-          notation-cli/bin/ notation version
+          notation version
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
