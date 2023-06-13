@@ -34,8 +34,9 @@ jobs:
           curl -LO https://github.com/notaryproject/notation/releases/download/v$NOTATION_VERSION/notation_$NOTATION_VERSION\_darwin_amd64.tar.gz
           curl -LO https://github.com/notaryproject/notation/releases/download/v$NOTATION_VERSION/notation_$NOTATION_VERSION\_checksums.txt
           shasum --check notation_$NOTATION_VERSION\_checksums.txt
-          sudo tar xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz -C /usr/local/bin/ notation
-          tar xvzf -C notation_1.0.0-rc.7_linux_amd64.tar.gz home/notation-cli/ notation
+          tar xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz -C /usr/local/bin/notation
+          mkdir notation-cli
+          tar xvzf -C notation_1.0.0-rc.7_linux_amd64.tar.gz home/notation-cli/notation
           echo 'export PATH="$PATH:home/notation-cli/"' >> ~/.bashrc
 
       - name: Verify Notation Installation
