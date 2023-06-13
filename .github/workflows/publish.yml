@@ -36,8 +36,9 @@ jobs:
           sudo mkdir bin
           cd ../
           sudo mv notation notation-cli/bin
-          echo "export PATH=/notation-cli/bin:\$PATH" >> $HOME/.bashrc
+          echo "export PATH=$PATH:/notation-cli/bin" >> $HOME/.bashrc
           source $HOME/.bashrc
+          notation version
 
       - name: Verify Notation Installation
         run: |
