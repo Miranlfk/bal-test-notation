@@ -34,7 +34,7 @@ jobs:
           tar -xvzf notation_1.0.0-rc.7_linux_amd64.tar.gz
           sudo mkdir notation-cli
           sudo mv notation notation-cli
-          echo '/notation-cli' >> $GITHUB_PATH
+          echo '/notation-cli/notation' >> $GITHUB_PATH
 
       - name: Verify Notation Installation
         run: |
