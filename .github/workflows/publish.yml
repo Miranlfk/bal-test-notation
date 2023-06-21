@@ -25,12 +25,12 @@ jobs:
           plugin_name: notation-azure-kv
           plugin_version:  0.5.0-rc.1
           
-      - name: Azure Container Registry Login
-        uses: Azure/docker-login@v1
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.AZURE_USER }}
-          password: ${{ secrets.AZURE_PASSWORD }}
-          login-server: ${{ env.REGISTRY }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build the Ballerina Docker image
         run: |
@@ -38,35 +38,13 @@ jobs:
           docker build --no-cache=true . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
           docker run ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
-      
-#       - name: Generate key to sign published Docker image
-#         run: notation cert generate-test --default "trusted" 
-        
+
       - name: Verify key generation
         run: notation key list 
      
       - name: Sign the published Docker image
-#         env: 
-# #           creds: ${{ secrets.AZURE_CREDENTIALS }}
-# #           password: ${{ secrets.GITHUB_TOKEN }}
-        run: notation sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
+        run: | 
+          notation sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}  \
+          -u ${{ secrets.NOTATION_USERNAME }} \
+          -p ${{ secrets.NOTATION_PASSWORD }}
         
-#       - name: Create GitHub release
-#         id: new-notation-test
-#         uses: actions/create-release@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           tag_name: v${{ github.run_number }}
-#           release_name: Release ${{ github.run_number }}
-          
-#       - name: Upload Public Key to GitHub release
-#         uses: actions/upload-release-asset@v1
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           upload_url: ${{ steps.new-notation-test.outputs.upload_url }}
-#           asset_path: ./trusted.pem
-#           asset_name: trusted.pem
-#           asset_content_type: application/octet-stream
-          
