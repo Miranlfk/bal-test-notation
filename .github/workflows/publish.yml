@@ -31,9 +31,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Notation Login
-        run: |
-          notation login ghcr.io -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
+      # - name: Notation Login
+      #   run: |
+      #     notation login ghcr.io -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
 
       - name: Build the Ballerina Docker image
         run: |
