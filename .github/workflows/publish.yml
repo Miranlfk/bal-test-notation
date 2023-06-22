@@ -31,6 +31,10 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Login via Notation
+        run: |
+          notation login ${{ env.REGISTRY }} -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
 
       - name: Build the Ballerina Docker image
         run: |
@@ -44,5 +48,5 @@ jobs:
      
       - name: Sign the published Docker image
         run: | 
-          notation sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }} -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
+          notation sign ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:v${{ github.run_number }}
         
