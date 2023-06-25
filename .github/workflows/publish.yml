@@ -47,5 +47,5 @@ jobs:
      
       - name: Sign the published Docker image
         run: | 
-          notation sign ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
+          notation sign --key balkeyazure ${{ env.REGISTRY }}/miranlfk/${{ env.IMAGE_NAME }}:v${{ github.run_number }} -u ${{ secrets.NOTATION_USERNAME }} -p ${{ secrets.NOTATION_PASSWORD }}
         
